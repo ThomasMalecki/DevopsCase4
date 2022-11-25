@@ -39,9 +39,33 @@ namespace DevopsCase4.View
         {
             this.Close();
         }
+
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            var UserName = txtUser.Text;
+            var Password = txtPass.Password;
 
+            using (UserDataContext context = new UserDataContext())
+            {
+                bool userfound = context.Users.Any(user => user.Name == UserName && user.Password == Password);
+
+                if (userfound)
+                {
+                    GrantAccess();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("User not found!");
+                }
+            }
+
+        }
+
+        public void GrantAccess()
+        {
+            DashboardView dashboard = new();
+            dashboard.Show();
         }
 
         private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
