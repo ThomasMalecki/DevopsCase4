@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "DevopsCase4/1.0.0": {
+        "runtime": {
+          "DevopsCase4.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DevopsCase4/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
