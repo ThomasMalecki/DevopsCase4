@@ -28,6 +28,7 @@ namespace DevopsCase4.View
         {
             this.WindowState = WindowState.Minimized;
         }
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Would you like to logout?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -42,13 +43,42 @@ namespace DevopsCase4.View
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                DragMove();
+                this.DragMove();
             }
         }
         public void Logout()
         {
             LoginView login = new();
             login.Show();
+        }
+
+        private bool IsMaximized = false;
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            Logout();
+            Close();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (IsMaximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Width = 1080;
+                    this.Height = 720;
+
+                    IsMaximized = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    IsMaximized = true;
+                }
+            }
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿<Window x:Class="DevopsCase4.View.DashboardView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DevopsCase4.View"
-        mc:Ignorable="d"
-        Title="LoginView" Height="800" Width="1200"
+        xmlns:local="clr-namespace:DevopsCase4.View" 
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Height="720" Width="1080"
         WindowStyle="none"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -23,9 +21,9 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="25"/>
@@ -82,6 +80,50 @@
                     </Button.Template>
                 </Button>
             </Grid>
+
+            <Grid Grid.Row = "1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button HorizontalAlignment="Left" Margin="20 28 0 35" Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+                    </Button>
+
+
+                    <Border Grid.Row ="1" Background="#FF462AD8" CornerRadius="0 50 0 10">
+                        <DockPanel>
+                            <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100"
+                                    DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="/View/logo.png"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Border>
+
+                            <StackPanel>
+                                <Button Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Dashboard"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+            <!--<Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="0,514,0,0" Grid.Row="1" VerticalAlignment="Top" Height="31" Width="254" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btnLogout_Click" Grid.ColumnSpan="2"/> -->
+
 
         </Grid>
     </Border>

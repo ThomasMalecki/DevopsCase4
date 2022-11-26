@@ -65,3 +65,6 @@ C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\bin\Debug\net6.0-windows\runtim
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\DevopsCase4.csproj.CopyComplete
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\DashboardView.g.cs
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\DashboardView.baml
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Core.dll
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Material.dll
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\App.baml

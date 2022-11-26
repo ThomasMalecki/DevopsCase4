@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "033VgLGphBVYpUlDFmUCO/3aSzFfm4yQ2i7kp97JH/uC/qbCR3LKhFEs1NMyFuqCNtQQxC9qod7ZBQPyLeNGww==",
+  "dgSpecHash": "hfHXC1/S6VahxEte4WQpNrLyB6Frh3hk7aF7pJCXdjiHhzanUu5F5/lyCDQ/cGzpbAYtF4wtJVdZU56weivIYQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\source\\repos\\DevopsCase4\\DevopsCase4\\DevopsCase4.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.0\\microsoft.data.sqlite.core.7.0.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.0\\microsoft.entityframeworkcore.7.0.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.0\\microsoft.entityframeworkcore.abstractions.7.0.0.nupkg.sha512",
