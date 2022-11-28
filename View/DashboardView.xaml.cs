@@ -80,5 +80,26 @@ namespace DevopsCase4.View
                 }
             }
         }
+
+        private void BtnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveUserControl(dashboard);
+            BtnDashboard.Background= new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
+        }
+
+        public void SetActiveUserControl (UserControl control)
+        {
+            dashboard.Visibility= Visibility.Collapsed;
+            customers.Visibility = Visibility.Collapsed;
+            BtnDashboard.Background = null;
+            BtnCustomers.Background = null;
+            control.Visibility= Visibility.Visible;
+        }
+
+        private void BtnCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveUserControl(customers);
+            BtnCustomers.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
+        }
     }
 }

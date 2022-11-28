@@ -10,10 +10,6 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
 
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-    </Window.Resources>
-    
     <Border CornerRadius="10"
             BorderThickness="2"
             BorderBrush="#161b22">
@@ -98,8 +94,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button HorizontalAlignment="Left" Margin="20 28 0 35" Style="{StaticResource topButton}">
-                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15" Style="{StaticResource menuButtonIcon}"/>
+                    <Button Margin="20 28 0 35" Style="{StaticResource topButton}" >
+                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15" VerticalAlignment="Top"/>
                     </Button>
 
 
@@ -115,18 +111,18 @@
                             </Border>
 
                             <StackPanel Margin="0 60">
-                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170">
+                                <Button x:Name="BtnDashboard" Cursor="Hand" Foreground="White" Background="#FF523AD0" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170" Click="BtnDashboard_Click">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button }">
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
                                                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
                                                         </Border>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                                <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
@@ -140,18 +136,18 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35">
+                                <Button x:Name="BtnCustomers" Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170" Click="BtnCustomers_Click">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button }">
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
                                                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
                                                         </Border>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                                <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
@@ -165,18 +161,18 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35">
+                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button }">
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
                                                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
                                                         </Border>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                                <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
@@ -195,12 +191,12 @@
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
                                                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
                                                         </Border>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                                <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
@@ -219,40 +215,11 @@
                     </Border>
                 </Grid>
 
-                <Grid Grid.Column="1" Margin="30 20 20 20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    
-                    <Grid Width="300" HorizontalAlignment="Left">
-                        <TextBlock Margin="20 0" VerticalAlignment="Center" IsHitTestVisible="False" Panel.ZIndex="1" 
-                                   Text="Search here...." 
-                                   Visibility="{Binding ElementName=txtSearchBar, Path=Text.isEmpty, Converter={StaticResource BoolToVis}}" Foreground="white"/>
-                        <TextBox x:Name="txtSearchBar" Style="{StaticResource textboxSearch}"/>
-
-                        <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"     
-                                               Margin="0 0 15 0" Foreground="White" HorizontalAlignment="Right" />
-
-                    </Grid>
-
-
-                    <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                        <Icon:PackIconMaterial Kind="Cog"/>
-                    </Button>
-
-                    <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                        <Icon:PackIconMaterial Kind="Bell"/>
-                    </Button>
-
-                    <TextBlock Text="Dashboard" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Foreground="white" Margin="0 20 0 0"/>
-
+                <Grid x:Name="ContentContainer" Grid.Column="1" Margin="30 20 20 20">
+                    <local:Dashboard x:Name="dashboard" ></local:Dashboard>
+                    <local:Customers x:Name="customers" Visibility="Collapsed"></local:Customers>
                 </Grid>
+                
             </Grid>
             
 

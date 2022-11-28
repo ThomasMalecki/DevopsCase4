@@ -138,3 +138,8 @@ C:\Users\asus\Documents\DevopsCase4\obj\Debug\net6.0-windows\refint\DevopsCase4.
 C:\Users\asus\Documents\DevopsCase4\obj\Debug\net6.0-windows\DevopsCase4.pdb
 C:\Users\asus\Documents\DevopsCase4\obj\Debug\net6.0-windows\DevopsCase4.genruntimeconfig.cache
 C:\Users\asus\Documents\DevopsCase4\obj\Debug\net6.0-windows\ref\DevopsCase4.dll
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Customers.g.cs
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Customers.baml
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Dashboard.g.cs
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Dashboard.baml
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs

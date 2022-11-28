@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\asus\Documents\DevopsCase4\obj\Debug\net6.0-windows\
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\
 DevopsCase4
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\asus\Documents\DevopsCase4\App.xaml
-21428635215
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\App.xaml
+4757917917
 
-8-1441519283
-214-155223471
-View\DashboardView.xaml;View\LoginView.xaml;
+10891852195
+214-1285146105
+View\Customers.xaml;View\Dashboard.xaml;View\DashboardView.xaml;View\LoginView.xaml;
 
 True
 
