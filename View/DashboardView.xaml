@@ -9,6 +9,11 @@
         Background="Transparent"
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+    
     <Border CornerRadius="10"
             BorderThickness="2"
             BorderBrush="#161b22">
@@ -94,7 +99,7 @@
                     </Grid.RowDefinitions>
 
                     <Button HorizontalAlignment="Left" Margin="20 28 0 35" Style="{StaticResource topButton}">
-                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15" Style="{StaticResource menuButtonIcon}"/>
                     </Button>
 
 
@@ -109,11 +114,103 @@
                                 </Ellipse>
                             </Border>
 
-                            <StackPanel>
-                                <Button Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35">
+                            <StackPanel Margin="0 60">
+                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button }">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
                                     <StackPanel Orientation="Horizontal">
                                         <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock VerticalAlignment="Center" Text="Dashboard"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button }">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial Kind="AccountMultiple" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Customers"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button }">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Profiles"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="btnLogout" Cursor="Hand" Click="btnLogout_Click" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Margin="15 3" Height="35" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button }">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="Transparent" TargetName="Border" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial Kind="ExitRun" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Logout"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -121,8 +218,43 @@
                         </DockPanel>
                     </Border>
                 </Grid>
+
+                <Grid Grid.Column="1" Margin="30 20 20 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid Width="300" HorizontalAlignment="Left">
+                        <TextBlock Margin="20 0" VerticalAlignment="Center" IsHitTestVisible="False" Panel.ZIndex="1" 
+                                   Text="Search here...." 
+                                   Visibility="{Binding ElementName=txtSearchBar, Path=Text.isEmpty, Converter={StaticResource BoolToVis}}" Foreground="white"/>
+                        <TextBox x:Name="txtSearchBar" Style="{StaticResource textboxSearch}"/>
+
+                        <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"     
+                                               Margin="0 0 15 0" Foreground="White" HorizontalAlignment="Right" />
+
+                    </Grid>
+
+
+                    <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                        <Icon:PackIconMaterial Kind="Cog"/>
+                    </Button>
+
+                    <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                        <Icon:PackIconMaterial Kind="Bell"/>
+                    </Button>
+
+                    <TextBlock Text="Dashboard" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Foreground="white" Margin="0 20 0 0"/>
+
+                </Grid>
             </Grid>
-            <!--<Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="0,514,0,0" Grid.Row="1" VerticalAlignment="Top" Height="31" Width="254" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="btnLogout_Click" Grid.ColumnSpan="2"/> -->
+            
 
 
         </Grid>
