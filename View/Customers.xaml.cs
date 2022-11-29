@@ -24,5 +24,21 @@ namespace DevopsCase4.View
         {
             InitializeComponent();
         }
+
+        public List<Customer> DatabaseCustomers { get; private set; }
+
+        public void Read()
+        {
+            using (UserDataContext context = new UserDataContext())
+            {
+                DatabaseCustomers = context.Customers.ToList();
+                CustomerList.ItemsSource = DatabaseCustomers;
+            }
+        }
+
+        private void ucCustomers_Loaded(object sender, RoutedEventArgs e)
+        {
+            Read();
+        }
     }
 }

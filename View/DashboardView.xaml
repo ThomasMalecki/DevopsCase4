@@ -103,14 +103,44 @@
                         <DockPanel>
                             <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100"
                                     DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+
                                 <Ellipse>
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="/View/logo.png"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                            </Border>
 
-                            <StackPanel Margin="0 60">
+                            </Border>
+                            <TextBlock Text="Welcome," Foreground="White" Margin="15 10 0 0" FontSize="16" DockPanel.Dock="Top"  HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock Text="Thomas Malecki" Foreground="White" Margin="15 0" FontSize="18"  DockPanel.Dock="Top"  HorizontalAlignment="Left"></TextBlock>
+                            <Separator Margin="15 25 15 0" DockPanel.Dock="Top" Height="0.8" Background="White"/>
+
+                            <Button x:Name="btnLogout" Cursor="Hand" Click="btnLogout_Click" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Margin="15 20" Height="35" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button }">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
+                                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="ExitRun" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="Logout"/>
+                                </StackPanel>
+                            </Button>
+                            <StackPanel Margin="0 20" DockPanel.Dock="Top">
+                                
                                 <Button x:Name="BtnDashboard" Cursor="Hand" Foreground="White" Background="#FF523AD0" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170" Click="BtnDashboard_Click">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button }">
@@ -185,32 +215,10 @@
                                         <TextBlock VerticalAlignment="Center" Text="Profiles"/>
                                     </StackPanel>
                                 </Button>
-                                <Button x:Name="btnLogout" Cursor="Hand" Click="btnLogout_Click" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Margin="15 3" Height="35" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button }">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
-                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
-                                                        </Border>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </Button.Style>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="ExitRun" Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock VerticalAlignment="Center" Text="Logout"/>
-                                    </StackPanel>
-                                </Button>
+                                
                             </StackPanel>
-
+                            
+                            
                         </DockPanel>
                     </Border>
                 </Grid>
