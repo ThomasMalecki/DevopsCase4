@@ -40,5 +40,16 @@ namespace DevopsCase4.View
         {
             Read();
         }
+
+        public void SetActiveUserControl(UserControl control)
+        {
+            //addcustomers.Visibility = Visibility.Collapsed;
+
+            //control.Visibility = Visibility.Visible;
+        }
+        private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            //SetActiveUserControl(addcustomers);
+        }
     }
 }

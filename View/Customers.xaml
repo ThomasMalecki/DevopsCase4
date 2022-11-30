@@ -13,9 +13,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="58*"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="339*"/>
         </Grid.RowDefinitions>
 
         <Grid Width="300" HorizontalAlignment="Left">
@@ -35,15 +35,39 @@
         <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
             <Icon:PackIconMaterial Kind="Bell"/>
         </Button>
+        <Grid Grid.Row="1">
+            <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Left" Text="Customers" FontSize="32" FontWeight="SemiBold" Foreground="white" Margin="0 0 0 10"/>
 
-        <TextBlock Text="Customers" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Foreground="white" Margin="0 0 0 10"/>
-
+            <Button x:Name="btnAddCustomer" Style="{StaticResource AddCustomer}" Cursor="Hand" Margin="5 0 0 0" Background="#FF462AD8" Foreground="White" HorizontalAlignment="Right" Click="btnAddCustomer_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Width="9" Margin="5 0" Kind="Plus"/>
+                    <TextBlock Text="Add Customer"></TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
         <Border Grid.Row="2"
               CornerRadius="30 0 10 0" Background="#FF323842">
 
             <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="CustomerList" Margin="30">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="Transparent"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
+                   Color="Transparent"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" 
+                   Color="Gray"/>
+
+                </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                    <DataGridTemplateColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Typography.Capitals="AllSmallCaps" VerticalAlignment="Center" Text="{Binding Id}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -66,10 +90,46 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
+
+                    <DataGridTemplateColumn Header="City" IsReadOnly="True" Width="*" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding City}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Typography.Capitals="AllSmallCaps" VerticalAlignment="Center" Text="|"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Actions" IsReadOnly="True" Width="85">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource Tablebuttons}" Cursor="Hand" Background="Orange" Foreground="White" HorizontalAlignment="Right">
+                                        <Icon:PackIconMaterial Kind="Pen"/>
+                                    </Button>
+                                    <Button Style="{StaticResource Tablebuttons}" Cursor="Hand" Margin="5 0 0 0" Background="DarkRed" Foreground="White" HorizontalAlignment="Right">
+                                        <Icon:PackIconMaterial Kind="TrashCan"/>
+                                    </Button>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
-            
+
         </Border>
     </Grid>
 </UserControl>
