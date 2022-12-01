@@ -21,20 +21,24 @@ namespace DevopsCase4.View
     /// </summary>
     public partial class Customers : UserControl
     {
+
         public Customers()
         {
             InitializeComponent();
         }
-
+        
         public List<Customer> DatabaseCustomers { get; private set; }
 
         public void Read()
         {
+            string useride = (string)GetValue(Dashboard.UidProperty);
+            int userid = int.Parse(useride);
             using (UserDataContext context = new UserDataContext())
             {
-                DatabaseCustomers = context.Customers.Where(user => user.userId == 1).ToList();
+                DatabaseCustomers = context.Customers.Where(user => user.userId == userid).ToList();
                 
                 CustomerList.ItemsSource = DatabaseCustomers;
+                
             }
         }
 
@@ -66,6 +70,7 @@ namespace DevopsCase4.View
             {
                 using (UserDataContext context = new UserDataContext())
                 {
+                    
                     var name = txtAddCustomerName.Text;
                     var lastName = txtAddCustomerLastName.Text;
                     var city = txtAddCity.Text;
@@ -77,7 +82,9 @@ namespace DevopsCase4.View
 
                     if (name != "" && lastName != "" && email != "")
                     {
-                        context.Customers.Add(new Customer() { Name = name, LastName = lastName, Email = email, Country = country, Province = province, Street = street, HouseNr = houseNr, City = city});
+                        string useride = (string)GetValue(Dashboard.UidProperty);
+                        int userid = int.Parse(useride);
+                        context.Customers.Add(new Customer() { Name = name, LastName = lastName, Email = email, Country = country, Province = province, Street = street, HouseNr = houseNr, City = city, userId=userid});
                         context.SaveChanges();
                         Read();
                     }

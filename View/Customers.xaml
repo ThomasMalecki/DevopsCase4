@@ -115,7 +115,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="btnCustomerEdit" Style="{StaticResource Tablebuttons}" Cursor="Hand" Background="Orange" Foreground="White" HorizontalAlignment="Right" Click="btnCustomerEdit_Click">
+                                        <Button x:Name="btnCustomerEdit" Style="{StaticResource Tablebuttons}" Cursor="Hand" Background="Orange" Foreground="White" HorizontalAlignment="Right">
                                             <StackPanel>
                                                 <Icon:PackIconMaterial Kind="Pen"/> 
                                             </StackPanel>

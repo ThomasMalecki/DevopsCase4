@@ -224,8 +224,8 @@
                 </Grid>
 
                 <Grid x:Name="ContentContainer" Grid.Column="1" Margin="30 20 20 20">
-                    <local:Dashboard x:Name="dashboard" ></local:Dashboard>
-                    <local:Customers x:Name="customers" Visibility="Collapsed"></local:Customers>
+                    <local:Dashboard x:Name="dashboard" Uid="1"></local:Dashboard>
+                    <local:Customers x:Name="customers" Uid="1" Visibility="Collapsed"></local:Customers>
                 </Grid>
                 
             </Grid>

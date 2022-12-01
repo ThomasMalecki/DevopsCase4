@@ -24,6 +24,12 @@ namespace DevopsCase4.View
         {
             InitializeComponent();
             userid = loginid;
+            dashboard.Uid = userid.ToString();
+            customers.Uid = userid.ToString();
+            using (UserDataContext context = new UserDataContext())
+            {
+                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Email).FirstOrDefault();
+            }
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -46,12 +52,6 @@ namespace DevopsCase4.View
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
-            }
-
-            using (UserDataContext context = new UserDataContext())
-            {
-               
-                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Email).FirstOrDefault();
             }
 
         }
