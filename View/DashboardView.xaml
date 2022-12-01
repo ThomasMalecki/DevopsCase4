@@ -112,7 +112,7 @@
 
                             </Border>
                             <TextBlock Text="Welcome," Foreground="White" Margin="15 10 0 0" FontSize="16" DockPanel.Dock="Top"  HorizontalAlignment="Left"></TextBlock>
-                            <TextBlock Text="Thomas Malecki" Foreground="White" Margin="15 0" FontSize="18"  DockPanel.Dock="Top"  HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock x:Name="txtNavigationUserName"  Foreground="White" Margin="15 0" FontSize="18"  DockPanel.Dock="Top"  HorizontalAlignment="Left"></TextBlock>
                             <Separator Margin="15 25 15 0" DockPanel.Dock="Top" Height="0.8" Background="White"/>
 
                             <Button x:Name="btnLogout" Cursor="Hand" Click="btnLogout_Click" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Margin="15 20" Height="35" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">

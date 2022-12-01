@@ -19,9 +19,11 @@ namespace DevopsCase4.View
     /// </summary>
     public partial class DashboardView : Window
     {
-        public DashboardView()
+        public int userid;
+        public DashboardView(int loginid)
         {
             InitializeComponent();
+            userid = loginid;
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -45,6 +47,13 @@ namespace DevopsCase4.View
             {
                 this.DragMove();
             }
+
+            using (UserDataContext context = new UserDataContext())
+            {
+               
+                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Email).FirstOrDefault();
+            }
+
         }
         public void Logout()
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DevopsCase4
 {
-    public class UserDataContext:DbContext
+    public class UserDataContext : DbContext
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

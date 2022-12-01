@@ -32,7 +32,8 @@ namespace DevopsCase4.View
         {
             using (UserDataContext context = new UserDataContext())
             {
-                DatabaseCustomers = context.Customers.Find(1).ToList();
+                DatabaseCustomers = context.Customers.Where(user => user.userId == 1).ToList();
+                
                 CustomerList.ItemsSource = DatabaseCustomers;
             }
         }
@@ -63,7 +64,6 @@ namespace DevopsCase4.View
         {
             if(btnAddCustomerAdd.Content == "Add")
             {
-
                 using (UserDataContext context = new UserDataContext())
                 {
                     var name = txtAddCustomerName.Text;

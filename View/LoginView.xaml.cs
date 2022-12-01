@@ -19,11 +19,11 @@ namespace DevopsCase4.View
     /// </summary>
     public partial class LoginView : Window
     {
+        public int loginId;
         public LoginView()
         {
             InitializeComponent();
         }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton==MouseButtonState.Pressed)
@@ -39,18 +39,18 @@ namespace DevopsCase4.View
         {
             this.Close();
         }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var UserName = txtUser.Text;
+            var email = txtUser.Text;
             var Password = txtPass.Password;
 
             using (UserDataContext context = new UserDataContext())
             {
-                bool userfound = context.Users.Any(user => user.Name == UserName && user.Password == Password);
-
+                bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
                 if (userfound)
                 {
+                    loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+
                     GrantAccess();
                     Close();
                 }
@@ -61,10 +61,9 @@ namespace DevopsCase4.View
             }
 
         }
-
         public void GrantAccess()
         {
-            DashboardView dashboard = new();
+            DashboardView dashboard = new(loginId);
             dashboard.Show();
         }
 
