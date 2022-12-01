@@ -32,12 +32,12 @@ namespace DevopsCase4.View
             }
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Would you like to logout?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if(result == MessageBoxResult.Yes)
@@ -63,7 +63,7 @@ namespace DevopsCase4.View
 
         private bool IsMaximized = false;
 
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             Logout();
             Close();

@@ -115,7 +115,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="btnCustomerEdit" Style="{StaticResource Tablebuttons}" Cursor="Hand" Background="Orange" Foreground="White" HorizontalAlignment="Right">
+                                        <Button x:Name="btnCustomerEdit" Style="{StaticResource Tablebuttons}" Cursor="Hand" Background="Orange" Foreground="White" HorizontalAlignment="Right" Click="btnCustomerEdit_Click">
                                             <StackPanel>
                                                 <Icon:PackIconMaterial Kind="Pen"/> 
                                             </StackPanel>
@@ -191,7 +191,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" Margin="0 5" Orientation="Horizontal">
-                        <Button x:Name="btnAddCustomerAdd" Background="#FF462AD8" Foreground="White" Cursor="Hand" Style="{StaticResource AddCustomerFieldButtons}" Content="Add" Click="btnAddCustomerAdd_Click"></Button>
+                        <Button x:Name="btnAddCustomerAdd" Background="#FF462AD8" Foreground="White" Cursor="Hand" Style="{StaticResource AddCustomerFieldButtons}" Content="" Click="btnAddCustomerAdd_Click"></Button>
                         <Button x:Name="btnAddCustomerCancel" Background="Gray" Foreground="White" Cursor="Hand" Style="{StaticResource AddCustomerFieldButtons}" Content="Cancel" Click="btnAddCustomerCancel_Click"></Button>
                     </StackPanel>
                 </Grid>
