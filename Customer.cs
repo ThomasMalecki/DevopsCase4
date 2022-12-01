@@ -6,7 +6,7 @@ namespace DevopsCase4
     {
         [Key]
         public int Id { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; } = default!;
         public string? Name { get; set; }
         public string? LastName { get; set; }
         public string? Country { get; set; }
@@ -14,5 +14,6 @@ namespace DevopsCase4
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? HouseNr { get; set; }
+
     }
 }

@@ -143,5 +143,3 @@ C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\C
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Dashboard.g.cs
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Dashboard.baml
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\AddCustomer.g.cs
-C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\AddCustomer.baml
