@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,9 @@ namespace DevopsCase4.View
             customers.Uid = userid.ToString();
             using (UserDataContext context = new UserDataContext())
             {
-                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Email).FirstOrDefault();
+                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault(); ;
             }
         }
-
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -62,6 +62,8 @@ namespace DevopsCase4.View
         }
 
         private bool IsMaximized = false;
+
+
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -100,6 +102,7 @@ namespace DevopsCase4.View
         {
             dashboard.Visibility= Visibility.Collapsed;
             customers.Visibility = Visibility.Collapsed;
+            messages.Visibility = Visibility.Collapsed;
             BtnDashboard.Background = null;
             BtnCustomers.Background = null;
             control.Visibility= Visibility.Visible;

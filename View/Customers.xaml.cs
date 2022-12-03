@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace DevopsCase4.View
 {
@@ -86,11 +87,14 @@ namespace DevopsCase4.View
                         int userid = int.Parse(useride);
                         context.Customers.Add(new Customer() { Name = name, LastName = lastName, Email = email, Country = country, Province = province, Street = street, HouseNr = houseNr, City = city, userId=userid});
                         context.SaveChanges();
+                        context.Logs.Add(new Log() { UserId = userid, Description = "Customer " + name + " " + lastName + " was created.", Action = "PlusBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
+                        context.SaveChanges();
                         Read();
                     }
                     CustomerList.Visibility = Visibility.Visible;
                     addCustomersField.Visibility = Visibility.Collapsed;
                     AddcustomerClear();
+
                 }
             }
             if(btnAddCustomerAdd.Content == "Edit")
@@ -114,6 +118,8 @@ namespace DevopsCase4.View
                         Customer? customer = context.Customers.Find(selectedCustomer.Id);
                         if (customer != null)
                         {
+                            string useride = (string)GetValue(Dashboard.UidProperty);
+                            int userid = int.Parse(useride);
                             customer.Name = name;
                             customer.LastName = lastName;
                             customer.City = city;
@@ -123,6 +129,9 @@ namespace DevopsCase4.View
                             customer.Province = province;
                             customer.Street = street;
 
+                            context.SaveChanges();
+
+                            context.Logs.Add(new Log() { UserId = userid, Description = "Customer " + name + " " + lastName + " was modfied.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
                             context.SaveChanges();
                         }
                         CustomerList.Visibility = Visibility.Visible;
@@ -140,26 +149,6 @@ namespace DevopsCase4.View
             addCustomersField.Visibility = Visibility.Collapsed;
             AddcustomerClear();
             
-        }
-
-        private void btnCustomerDelete_Click(object sender, RoutedEventArgs e)
-        {
-            using (UserDataContext context = new UserDataContext())
-            {
-                Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
-
-                if(selectedCustomer != null )
-                {
-                        
-                    Customer? customer = context.Customers.Find(selectedCustomer.Id);
-                    if(customer != null)
-                    {
-                        context.Remove(customer);
-                        context.SaveChanges();
-                    }
-                    Read();
-                }
-            }
         }
 
         private void btnCustomerEdit_Click(object sender, RoutedEventArgs e)
@@ -192,5 +181,34 @@ namespace DevopsCase4.View
 
         }
 
+        private void btnCustomerDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Would you like to remove this user?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                using (UserDataContext context = new UserDataContext())
+                {
+
+                    Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
+
+
+                    if (selectedCustomer != null)
+                    {
+                        Customer? customer = context.Customers.Find(selectedCustomer.Id);
+                        if (customer != null)
+                        {
+                            string useride = (string)GetValue(Dashboard.UidProperty);
+                            int userid = int.Parse(useride);
+                            context.Remove(customer);
+                            context.SaveChanges();
+                            context.Logs.Add(new Log() { UserId = userid, Description = "Customer " + selectedCustomer.Name + " " + selectedCustomer.LastName + " was removed.", Action = "MinusBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
+                            context.SaveChanges();
+                        }
+                        Read();
+                    }
+                }
+            }
+            
+        }
     }
 }

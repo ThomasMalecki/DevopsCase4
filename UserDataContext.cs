@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DevopsCase4.View;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,6 @@ namespace DevopsCase4
 
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Log> Logs { get; set; }
     }
 }

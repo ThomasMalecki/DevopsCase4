@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DevopsCase4.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" MouseMove="ucDashboard_MouseMove">
+             d:DesignHeight="450" d:DesignWidth="800" MouseMove="ucDashboard_MouseMove" Loaded="ucDashboard_Loaded">
     
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -52,14 +52,57 @@
                     
                 </Border>
                 
-                <Border Grid.Column="1" Grid.ColumnSpan="3" Margin="25" CornerRadius="10" Background="#21262d">
-                    <StackPanel
-                        Orientation="Vertical" VerticalAlignment="center" HorizontalAlignment="Center">
+                <Border Grid.Column="1" Grid.ColumnSpan="3" Margin="20" CornerRadius="10" Background="#21262d">
+                    <StackPanel Orientation="Vertical" Margin="20">
+                        <TextBlock Text="Activity" FontSize="16" Foreground="White" Margin="0 0 0 5"></TextBlock>
 
-                        <Icon:PackIconMaterial Foreground="White" Kind="Clock" Width="50" Height="50" Margin="5"></Icon:PackIconMaterial>
-                        <TextBlock HorizontalAlignment="Center" FontSize="20" Foreground="White" Text="10:20" Margin="5"/>
+
+                        <DataGrid Visibility="Visible" Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle2}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle3}" RowStyle="{DynamicResource DataGridRowStyle2}" x:Name="ActivityList">
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                       Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
+                       Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" 
+                       Color="Gray"/>
+
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <Icon:PackIconMaterial x:Name="icoActivity" Grid.Column="2" HorizontalAlignment="Center" Kind="{Binding Action}" Height="10" VerticalAlignment="Center" Foreground="#FF462AD8" ></Icon:PackIconMaterial>
+
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="" IsReadOnly="True" Width="120" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Grid.Column="0" HorizontalAlignment="Center" Foreground="White" Text="{Binding Timestamp}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="" IsReadOnly="True" Width="*" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Foreground="White" Text="{Binding Description}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </StackPanel>
-
+                    
+                    
+                    
+                    
                 </Border>
 
             </Grid>

@@ -143,7 +143,7 @@
                                 
                                 <Button x:Name="BtnDashboard" Cursor="Hand" Foreground="White" Background="#FF523AD0" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170" Click="BtnDashboard_Click">
                                     <Button.Style>
-                                        <Style TargetType="{x:Type Button }">
+                                        <Style TargetType="{x:Type Button}">
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -211,8 +211,8 @@
                                         </Style>
                                     </Button.Style>
                                     <StackPanel Orientation="Horizontal">
-                                        <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
-                                        <TextBlock VerticalAlignment="Center" Text="Profiles"/>
+                                        <Icon:PackIconMaterial Kind="Chat" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Messages"/>
                                     </StackPanel>
                                 </Button>
                                 
@@ -224,8 +224,9 @@
                 </Grid>
 
                 <Grid x:Name="ContentContainer" Grid.Column="1" Margin="30 20 20 20">
-                    <local:Dashboard x:Name="dashboard" Uid="1"></local:Dashboard>
-                    <local:Customers x:Name="customers" Uid="1" Visibility="Collapsed"></local:Customers>
+                    <local:Dashboard x:Name="dashboard" Uid=""></local:Dashboard>
+                    <local:Customers x:Name="customers" Uid="" Visibility="Collapsed"></local:Customers>
+                    
                 </Grid>
                 
             </Grid>

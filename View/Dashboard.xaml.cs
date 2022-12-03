@@ -21,6 +21,8 @@ namespace DevopsCase4.View
     /// </summary>
     public partial class Dashboard : UserControl
     {
+        public List<Log> DatabaseLogs { get; private set; }
+
         public Dashboard()
         {
             InitializeComponent();
@@ -30,6 +32,26 @@ namespace DevopsCase4.View
         private void ucDashboard_MouseMove(object sender, MouseEventArgs e)
         {
             txtDashboardTime.Text = DateTime.Now.ToString("HH:mm");
+            Read();
+        }
+
+        public void Read()
+        {
+            string useride = (string)GetValue(Dashboard.UidProperty);
+            int userid = int.Parse(useride);
+            using (UserDataContext context = new UserDataContext())
+            {
+                DatabaseLogs = context.Logs.Where(log => log.UserId == userid).OrderByDescending(x => x.Id).Take(4).ToList();
+
+                ActivityList.ItemsSource = DatabaseLogs;
+
+
+            }
+        }
+
+        private void ucDashboard_Loaded(object sender, RoutedEventArgs e)
+        {
+            Read();
         }
     }
 }
