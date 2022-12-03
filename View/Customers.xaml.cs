@@ -32,7 +32,7 @@ namespace DevopsCase4.View
 
         public void Read()
         {
-            string useride = (string)GetValue(Dashboard.UidProperty);
+            string useride = (string)GetValue(Customers.UidProperty);
             int userid = int.Parse(useride);
             using (UserDataContext context = new UserDataContext())
             {
@@ -83,7 +83,7 @@ namespace DevopsCase4.View
 
                     if (name != "" && lastName != "" && email != "")
                     {
-                        string useride = (string)GetValue(Dashboard.UidProperty);
+                        string useride = (string)GetValue(Customers.UidProperty);
                         int userid = int.Parse(useride);
                         context.Customers.Add(new Customer() { Name = name, LastName = lastName, Email = email, Country = country, Province = province, Street = street, HouseNr = houseNr, City = city, userId=userid});
                         context.SaveChanges();
@@ -118,7 +118,7 @@ namespace DevopsCase4.View
                         Customer? customer = context.Customers.Find(selectedCustomer.Id);
                         if (customer != null)
                         {
-                            string useride = (string)GetValue(Dashboard.UidProperty);
+                            string useride = (string)GetValue(Customers.UidProperty);
                             int userid = int.Parse(useride);
                             customer.Name = name;
                             customer.LastName = lastName;
@@ -197,7 +197,7 @@ namespace DevopsCase4.View
                         Customer? customer = context.Customers.Find(selectedCustomer.Id);
                         if (customer != null)
                         {
-                            string useride = (string)GetValue(Dashboard.UidProperty);
+                            string useride = (string)GetValue(Customers.UidProperty);
                             int userid = int.Parse(useride);
                             context.Remove(customer);
                             context.SaveChanges();

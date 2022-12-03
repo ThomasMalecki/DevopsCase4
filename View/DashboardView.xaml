@@ -191,7 +191,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170">
+                                <Button x:Name="BtnMessages" Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170" Click="BtnMessages_Click">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button }">
                                             <Setter Property="Template">
@@ -224,9 +224,9 @@
                 </Grid>
 
                 <Grid x:Name="ContentContainer" Grid.Column="1" Margin="30 20 20 20">
-                    <local:Dashboard x:Name="dashboard" Uid=""></local:Dashboard>
-                    <local:Customers x:Name="customers" Uid="" Visibility="Collapsed"></local:Customers>
-                    
+                    <local:Dashboard x:Name="dashboard" Uid="0"></local:Dashboard>
+                    <local:Customers x:Name="customers" Uid="0" Visibility="Collapsed"></local:Customers>
+                    <local:Messages x:Name="messages" Uid="0" Visibility="Collapsed"></local:Messages>
                 </Grid>
                 
             </Grid>

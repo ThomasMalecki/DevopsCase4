@@ -144,3 +144,4 @@ C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\D
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Dashboard.baml
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Messages.g.cs
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Messages.baml

@@ -10,8 +10,6 @@
 //------------------------------------------------------------------------------
 
 using DevopsCase4.View;
-using MahApps.Metro.IconPacks;
-using MahApps.Metro.IconPacks.Converter;
 using System;
 using System.Diagnostics;
 using System.Windows;

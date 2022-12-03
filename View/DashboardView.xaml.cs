@@ -27,6 +27,7 @@ namespace DevopsCase4.View
             userid = loginid;
             dashboard.Uid = userid.ToString();
             customers.Uid = userid.ToString();
+            messages.Uid = userid.ToString();
             using (UserDataContext context = new UserDataContext())
             {
                 txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault(); ;
@@ -105,6 +106,7 @@ namespace DevopsCase4.View
             messages.Visibility = Visibility.Collapsed;
             BtnDashboard.Background = null;
             BtnCustomers.Background = null;
+            BtnMessages.Background = null;
             control.Visibility= Visibility.Visible;
         }
 
@@ -112,6 +114,12 @@ namespace DevopsCase4.View
         {
             SetActiveUserControl(customers);
             BtnCustomers.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
+        }
+
+        private void BtnMessages_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveUserControl(messages);
+            BtnMessages.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
         }
     }
 }
