@@ -598,5 +598,121 @@
         </Style>
 
 
+
+        <Style x:Key="textboxChatSend" TargetType="TextBox">
+            <Setter Property="Background" Value="#FF4E545F"/>
+            <Setter Property="Foreground" Value="white"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="15 10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBoxBase">
+                        <Border x:Name="border" CornerRadius="5 0 0 5" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True" BorderThickness="1" 
+                                BorderBrush="#e0e6ed">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF4E545F" TargetName="border"></Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF4E545F" TargetName="border"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="textboxChatButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF462AD8" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="0 5 5 0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        
+        
+        <Style x:Key="ChatPersonSearchButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF462AD8" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Margin" Value="0 1 0 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="0 5 5 0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="textboxChatPersonSearch" TargetType="TextBox">
+            <Setter Property="Background" Value="#FF4E545F"/>
+            <Setter Property="Foreground" Value="white"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="15 5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBoxBase">
+                        <Border x:Name="border" CornerRadius="5 0 0 5" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True" BorderThickness="1" 
+                                BorderBrush="#e0e6ed">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF4E545F" TargetName="border"></Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF4E545F" TargetName="border"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

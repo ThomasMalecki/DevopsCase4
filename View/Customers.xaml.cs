@@ -94,7 +94,6 @@ namespace DevopsCase4.View
                     CustomerList.Visibility = Visibility.Visible;
                     addCustomersField.Visibility = Visibility.Collapsed;
                     AddcustomerClear();
-
                 }
             }
             if(btnAddCustomerAdd.Content == "Edit")
