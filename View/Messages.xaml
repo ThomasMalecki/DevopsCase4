@@ -13,7 +13,10 @@
             <RowDefinition Height="339*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Left" Text="Messages" FontSize="32" FontWeight="SemiBold" Foreground="white" Margin="0 0 0 30"/>
+            <StackPanel Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Left" Text="Messages" FontSize="32" FontWeight="SemiBold" Foreground="white"/>
+                <TextBlock HorizontalAlignment="Left" Text="Send private messages to different users." Foreground="White" Margin="0 0 0 15"></TextBlock>
+            </StackPanel>
         </Grid>
         <Border Grid.Row="1"
               CornerRadius="30 0 10 0" Background="#FF323842">

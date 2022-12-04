@@ -24,14 +24,6 @@
             />
         </Grid>
 
-
-        <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-            <Icon:PackIconMaterial Kind="Cog"/>
-        </Button>
-
-        <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
-            <Icon:PackIconMaterial Kind="Bell"/>
-        </Button>
         <Grid Grid.Row="1">
             <TextBlock HorizontalAlignment="Left" DockPanel.Dock="Left" Text="Customers" FontSize="32" FontWeight="SemiBold" Foreground="white" Margin="0 0 0 10"/>
 

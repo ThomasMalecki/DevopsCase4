@@ -95,31 +95,37 @@ namespace DevopsCase4.View
 
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            SetActiveUserControl(dashboard);
-            BtnDashboard.Background= new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
+            SetActiveUserControl(dashboard, BtnDashboard);
         }
 
-        public void SetActiveUserControl (UserControl control)
+        public void SetActiveUserControl (UserControl control, Button button)
         {
             dashboard.Visibility= Visibility.Collapsed;
             customers.Visibility = Visibility.Collapsed;
             messages.Visibility = Visibility.Collapsed;
+            settings.Visibility = Visibility.Collapsed;
             BtnDashboard.Background = null;
             BtnCustomers.Background = null;
             BtnMessages.Background = null;
+            BtnSettings.Background = null;
+            MessageBox.Show(System.Reflection.Assembly.GetExecutingAssembly().Location);
             control.Visibility= Visibility.Visible;
+            button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
         }
 
         private void BtnCustomers_Click(object sender, RoutedEventArgs e)
         {
-            SetActiveUserControl(customers);
-            BtnCustomers.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
+            SetActiveUserControl(customers ,BtnCustomers);
         }
 
         private void BtnMessages_Click(object sender, RoutedEventArgs e)
         {
-            SetActiveUserControl(messages);
-            BtnMessages.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF523AD0"));
+            SetActiveUserControl(messages, BtnMessages);
+        }
+
+        private void BtnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveUserControl(settings, BtnSettings);
         }
     }
 }

@@ -98,7 +98,6 @@ namespace DevopsCase4.View
 
                 if (content != "" )
                 {
-                    MessageBox.Show("Fromid" + userid + "Toid" + ChatToId);
                     context.Messages.Add(new Message() { ToId = userid, FromId = ChatToId, Content = content});
                     context.SaveChanges();
                     

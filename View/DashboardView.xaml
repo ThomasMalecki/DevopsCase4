@@ -215,7 +215,32 @@
                                         <TextBlock VerticalAlignment="Center" Text="Messages"/>
                                     </StackPanel>
                                 </Button>
-                                
+
+                                <Button x:Name="BtnSettings" Cursor="Hand" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="15 3" Height="35" Width="170" Click="BtnSettings_Click">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button }">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
+                                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#FF4F35DA" TargetName="Border" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Icon:PackIconMaterial Kind="Cog" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Settings"/>
+                                    </StackPanel>
+                                </Button>
+
                             </StackPanel>
                             
                             
@@ -227,6 +252,7 @@
                     <local:Dashboard x:Name="dashboard" Uid="0"></local:Dashboard>
                     <local:Customers x:Name="customers" Uid="0" Visibility="Collapsed"></local:Customers>
                     <local:Messages x:Name="messages" Uid="0" Visibility="Collapsed"></local:Messages>
+                    <local:Settings x:Name="settings" Uid="0" Visibility="Collapsed"></local:Settings>
                 </Grid>
                 
             </Grid>
