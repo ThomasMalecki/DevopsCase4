@@ -41,7 +41,7 @@ namespace DevopsCase4.View
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var email = txtUser.Text;
+            var email = (txtUser.Text).ToLower();
             var Password = txtPass.Password;
 
             using (UserDataContext context = new UserDataContext())

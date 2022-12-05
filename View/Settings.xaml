@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="DevopsCase4.View.Settings"
+﻿<UserControl x:Name="ucSettings"  x:Class="DevopsCase4.View.Settings"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DevopsCase4.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="ucSettings_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,6 +19,71 @@
         </Grid>
         <Border Grid.Row="1"
               CornerRadius="30 0 10 0" Background="#FF323842">
+
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="0 5" Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="Name:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeName" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="Lastname:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeLastName" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="Email:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeEmail" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="0 5" Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="Country:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeCountry" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="Province:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeProvince" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+
+
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="0 5" Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="City:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeCity" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="Street:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeStreet" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock  Text="HouseNr:" Style="{StaticResource AddCustomerTextBlock}"></TextBlock>
+                        <TextBox x:Name="txtChangeHouseNr" Style="{StaticResource AddCustomerInput}"/>
+
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Margin="0 5" Orientation="Horizontal">
+                    <Button x:Name="BtnUserEdit" Background="#FF462AD8" Foreground="White" Cursor="Hand" Style="{StaticResource AddCustomerFieldButtons}" Content="Save changes" Click="BtnUserEdit_Click"/>
+                    <Button x:Name="BtnUserEditCancel" Background="Gray" Foreground="White" Cursor="Hand" Style="{StaticResource AddCustomerFieldButtons}" Content="Cancel" Click="BtnUserEditCancel_Click"/>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

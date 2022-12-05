@@ -111,7 +111,7 @@ namespace DevopsCase4.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DevopsCase4;V1.0.0.0;component/view/messages.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DevopsCase4;component/view/messages.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\Messages.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
