@@ -32,6 +32,15 @@ namespace DevopsCase4.View
             using (UserDataContext context = new())
             {
                 txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault(); ;
+                if(context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() == null || context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault() == null )
+                {
+                    MessageBoxResult result =  MessageBox.Show("Your Credentials need to be completed. Want to complete them now?", "Warning" , MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        SetActiveUserControl(settings, BtnSettings);
+                    }
+                }
+            
             }
         }
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)

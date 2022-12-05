@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace DevopsCase4.View
 {
@@ -23,6 +26,7 @@ namespace DevopsCase4.View
         public LoginView()
         {
             InitializeComponent();
+            btnLogin.Content = "LOG IN";
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -44,22 +48,45 @@ namespace DevopsCase4.View
             var email = (txtUser.Text).ToLower();
             var Password = txtPass.Password;
 
-            using (UserDataContext context = new())
+            if (btnLogin.Content == "LOG IN")
             {
-                bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
-                if (userfound)
-                {
-                    loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+                
 
-                    GrantAccess();
-                    Close();
-                }
-                else
+                using (UserDataContext context = new())
                 {
-                    MessageBox.Show("User not found!");
+                    bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
+                    if (userfound)
+                    {
+                        loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+
+                        GrantAccess();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect username or password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
             }
-
+            else
+            {
+                using (UserDataContext context = new())
+                {
+                    bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
+                    if (!userfound)
+                    {
+                        context.Users.Add(new User() { Email = email, Password = Password });
+                        context.SaveChanges();
+                        loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+                        GrantAccess();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username already exists", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+            }
         }
         public void GrantAccess()
         {
@@ -67,9 +94,26 @@ namespace DevopsCase4.View
             dashboard.Show();
         }
 
-        private void TxtUser_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            if (btnLogin.Content != "LOG IN")
+            {
+
+                TxtNewUser.Text = "New user?";
+                BtnRegister.Content = "Register";
+                TxtLogin.Text = "Login";
+                btnLogin.Content = "LOG IN";
+            }
+            else
+            {
+                TxtNewUser.Text = "Already have an account?";
+                BtnRegister.Content = "Login";
+                TxtLogin.Text = "Register";
+                btnLogin.Content = "REGISTER";
+            }
         }
     }
 }
