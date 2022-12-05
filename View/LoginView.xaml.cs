@@ -31,20 +31,20 @@ namespace DevopsCase4.View
                 DragMove();
             }
         }
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             var email = (txtUser.Text).ToLower();
             var Password = txtPass.Password;
 
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
                 if (userfound)
@@ -67,7 +67,7 @@ namespace DevopsCase4.View
             dashboard.Show();
         }
 
-        private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
+        private void TxtUser_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

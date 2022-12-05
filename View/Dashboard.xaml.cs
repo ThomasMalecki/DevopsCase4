@@ -29,7 +29,7 @@ namespace DevopsCase4.View
             
         }
 
-        private void ucDashboard_MouseMove(object sender, MouseEventArgs e)
+        private void UcDashboard_MouseMove(object sender, MouseEventArgs e)
         {
             txtDashboardTime.Text = DateTime.Now.ToString("HH:mm");
             Read();
@@ -39,7 +39,7 @@ namespace DevopsCase4.View
         {
             string useride = (string)GetValue(Dashboard.UidProperty);
             int userid = int.Parse(useride);
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 DatabaseLogs = context.Logs.Where(log => log.UserId == userid).OrderByDescending(x => x.Id).Take(4).ToList();
 
@@ -49,7 +49,7 @@ namespace DevopsCase4.View
             }
         }
 
-        private void ucDashboard_Loaded(object sender, RoutedEventArgs e)
+        private void UcDashboard_Loaded(object sender, RoutedEventArgs e)
         {
             Read();
         }

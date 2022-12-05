@@ -30,7 +30,7 @@ namespace DevopsCase4.View
 
         private void ShowUserInfo()
         {
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 string useride = (string)GetValue(Settings.UidProperty);
                 int userid = int.Parse(useride);
@@ -50,7 +50,7 @@ namespace DevopsCase4.View
             }
         }
 
-        private void ucSettings_Loaded(object sender, RoutedEventArgs e)
+        private void UcSettings_Loaded(object sender, RoutedEventArgs e)
         {
             ShowUserInfo();
         }
@@ -62,7 +62,7 @@ namespace DevopsCase4.View
 
         private void BtnUserEdit_Click(object sender, RoutedEventArgs e)
         {
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 string useride = (string)GetValue(Settings.UidProperty);
                 int userid = int.Parse(useride);

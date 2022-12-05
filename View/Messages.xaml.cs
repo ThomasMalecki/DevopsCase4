@@ -40,7 +40,7 @@ namespace DevopsCase4.View
         public int ChatToId;
         public void Read()
         {
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 string useride = (string)GetValue(Messages.UidProperty);
                 int userid = int.Parse(useride);
@@ -53,7 +53,7 @@ namespace DevopsCase4.View
         }
         public void ReadChat()
         {
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
 
                 User? selectedUser = MessageUserList.SelectedItem as User;
@@ -77,7 +77,7 @@ namespace DevopsCase4.View
                 }
             }
         }
-        private void ucMessages_Loaded(object sender, RoutedEventArgs e)
+        private void UcMessages_Loaded(object sender, RoutedEventArgs e)
         {
             Read();
         }
@@ -89,7 +89,7 @@ namespace DevopsCase4.View
 
         private void BtnChatSend_Click(object sender, RoutedEventArgs e)
         {
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 string content = txtChatMessageBox.Text;
 
@@ -114,7 +114,7 @@ namespace DevopsCase4.View
         {
             string email = txtSearchPersonChat.Text;
 
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 bool userfound = context.Users.Any(user => user.Email == email);
 

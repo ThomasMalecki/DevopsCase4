@@ -48,7 +48,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Grid.Column="1"
-                            Click="btnMinimize_Click" Height="30" VerticalAlignment="Top" Background="{x:Null}">
+                            Click="BtnMinimize_Click" Height="30" VerticalAlignment="Top" Background="{x:Null}">
                     
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -69,7 +69,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Grid.Column="2"
-                            Click="btnClose_Click" Background="{x:Null}">
+                            Click="BtnClose_Click" Background="{x:Null}">
 
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -120,7 +120,7 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="20,0,0,0" TextChanged="txtUser_TextChanged">
+                             Padding="20,0,0,0" TextChanged="TxtUser_TextChanged">
                     <TextBox.Background>
                         <ImageBrush ImageSource="/View/user-icon.png"
                                         Stretch="None"
@@ -159,7 +159,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
                             Margin="0,50,0,0"
-                            Click="btnLogin_Click">
+                            Click="BtnLogin_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#462AD8"/>

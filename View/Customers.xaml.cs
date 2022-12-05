@@ -34,7 +34,7 @@ namespace DevopsCase4.View
         {
             string useride = (string)GetValue(Customers.UidProperty);
             int userid = int.Parse(useride);
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 DatabaseCustomers = context.Customers.Where(user => user.userId == userid).ToList();
                 
@@ -69,7 +69,7 @@ namespace DevopsCase4.View
         {
             if(btnAddCustomerAdd.Content == "Add")
             {
-                using (UserDataContext context = new UserDataContext())
+                using (UserDataContext context = new())
                 {
                     
                     var name = txtAddCustomerName.Text;
@@ -98,7 +98,7 @@ namespace DevopsCase4.View
             }
             if(btnAddCustomerAdd.Content == "Edit")
             {
-                using (UserDataContext context = new UserDataContext())
+                using (UserDataContext context = new())
                 {
                     Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
 
@@ -155,7 +155,7 @@ namespace DevopsCase4.View
             btnAddCustomerAdd.Content = "Edit";
             CustomerList.Visibility = Visibility.Collapsed;
             addCustomersField.Visibility = Visibility.Visible;
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
                 if(selectedCustomer != null)
@@ -185,7 +185,7 @@ namespace DevopsCase4.View
             MessageBoxResult result = MessageBox.Show("Would you like to remove this user?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                using (UserDataContext context = new UserDataContext())
+                using (UserDataContext context = new())
                 {
 
                     Customer? selectedCustomer = CustomerList.SelectedItem as Customer;

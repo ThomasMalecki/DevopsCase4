@@ -29,7 +29,7 @@ namespace DevopsCase4.View
             customers.Uid = userid.ToString();
             messages.Uid = userid.ToString();
             settings.Uid = userid.ToString();
-            using (UserDataContext context = new UserDataContext())
+            using (UserDataContext context = new())
             {
                 txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault(); ;
             }
@@ -57,7 +57,7 @@ namespace DevopsCase4.View
             }
 
         }
-        public void Logout()
+        public static void Logout()
         {
             LoginView login = new();
             login.Show();
