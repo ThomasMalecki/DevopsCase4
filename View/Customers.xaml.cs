@@ -111,7 +111,7 @@ namespace DevopsCase4.View
                     var province = txtAddProvince.Text;
                     var street = txtAddStreet.Text;
 
-                    if (name != null && lastName != null && email != null && selectedCustomer != null)
+                    if (name != "" && lastName != "" && email != "" && selectedCustomer != null)
                     {
 
                         Customer? customer = context.Customers.Find(selectedCustomer.Id);

@@ -51,40 +51,56 @@ namespace DevopsCase4.View
             if (btnLogin.Content == "LOG IN")
             {
                 
-
-                using (UserDataContext context = new())
+                if(email != "" && Password != "")
                 {
-                    bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
-                    if (userfound)
-                    {
-                        loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
 
-                        GrantAccess();
-                        Close();
-                    }
-                    else
+                    using (UserDataContext context = new())
                     {
-                        MessageBox.Show("Incorrect username or password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
+                        if (userfound)
+                        {
+                            loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+
+                            GrantAccess();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Incorrect username or password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
+
+                }
+                else
+                {
+                    MessageBox.Show("You must fill in both fields.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
                 }
             }
             else
             {
-                using (UserDataContext context = new())
+                if (email != "" && Password != "") { 
+                    using (UserDataContext context = new())
+                    {
+                        bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
+                        if (!userfound)
+                        {
+                            context.Users.Add(new User() { Email = email, Password = Password });
+                            context.SaveChanges();
+                            loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+                            GrantAccess();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Username already exists", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
+                }
+                else
                 {
-                    bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
-                    if (!userfound)
-                    {
-                        context.Users.Add(new User() { Email = email, Password = Password });
-                        context.SaveChanges();
-                        loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
-                        GrantAccess();
-                        Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Username already exists", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                    MessageBox.Show("You must fill in both fields.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
                 }
             }
         }

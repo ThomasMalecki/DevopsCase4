@@ -29,18 +29,29 @@ namespace DevopsCase4.View
             customers.Uid = userid.ToString();
             messages.Uid = userid.ToString();
             settings.Uid = userid.ToString();
+            
             using (UserDataContext context = new())
             {
-                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault(); ;
-                if(context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() == null || context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault() == null )
+                
+                if (context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() == null || context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault() == null)
                 {
-                    MessageBoxResult result =  MessageBox.Show("Your Credentials need to be completed. Want to complete them now?", "Warning" , MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    MessageBoxResult result = MessageBox.Show("Your Credentials need to be completed. Want to complete them now?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (result == MessageBoxResult.Yes)
                     {
                         SetActiveUserControl(settings, BtnSettings);
                     }
                 }
-            
+
+            }
+            ReloadInfo();
+
+
+        }
+        public void ReloadInfo()
+        {
+            using (UserDataContext context = new())
+            {
+                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault();
             }
         }
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
@@ -125,16 +136,19 @@ namespace DevopsCase4.View
         private void BtnCustomers_Click(object sender, RoutedEventArgs e)
         {
             SetActiveUserControl(customers ,BtnCustomers);
+            ReloadInfo();
         }
 
         private void BtnMessages_Click(object sender, RoutedEventArgs e)
         {
             SetActiveUserControl(messages, BtnMessages);
+            ReloadInfo();
         }
 
         private void BtnSettings_Click(object sender, RoutedEventArgs e)
         {
             SetActiveUserControl(settings, BtnSettings);
+            ReloadInfo();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,17 +62,19 @@ namespace DevopsCase4.View
                 if (selectedUser != null)
                 {
                     
-                    User? message = context.Users.Find(selectedUser.Id);
-                    if (message != null)
+                    User? SelectedUserdata = context.Users.Find(selectedUser.Id);
+                    if (SelectedUserdata != null)
                     {
                         
                         string useride = (string)GetValue(Customers.UidProperty);
                         int userid = int.Parse(useride);
 
-                        MessageContentList = context.Messages.Where(id => id.FromId == userid && id.ToId == message.Id || id.FromId == message.Id && id.ToId == userid).ToList();
-
+                        MessageContentList = context.Messages
+                            .Where(messages => messages.FromId == userid && messages.ToId == SelectedUserdata.Id || messages.FromId == SelectedUserdata.Id && messages.ToId == userid)
+                            .ToList();
+                        //.Where(messages => context.Users.Where(user => user.Id == messages.FromId)).Select(user => user.Name)
                         MessagesList.ItemsSource = MessageContentList;
-                        ChatToId = message.Id;
+                        ChatToId = SelectedUserdata.Id;
                     }
                     Read();
                 }

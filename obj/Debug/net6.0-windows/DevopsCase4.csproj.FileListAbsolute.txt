@@ -147,3 +147,4 @@ C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\M
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Messages.baml
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Settings.g.cs
 C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\obj\Debug\net6.0-windows\View\Settings.baml
+C:\Users\PC\source\repos\DevopsCase4\DevopsCase4\bin\Debug\net6.0-windows\Dapper.dll

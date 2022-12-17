@@ -8,12 +8,21 @@
     ".NETCoreApp,Version=v6.0": {
       "DevopsCase4/1.0.0": {
         "dependencies": {
+          "Dapper": "2.0.123",
           "MahApps.Metro.IconPacks.Material": "4.11.0",
           "Microsoft.Data.Sqlite.Core": "7.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.0"
         },
         "runtime": {
           "DevopsCase4.dll": {}
+        }
+      },
+      "Dapper/2.0.123": {
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.123.33578"
+          }
         }
       },
       "MahApps.Metro.IconPacks.Material/4.11.0": {
@@ -395,6 +404,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Dapper/2.0.123": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "path": "dapper/2.0.123",
+      "hashPath": "dapper.2.0.123.nupkg.sha512"
     },
     "MahApps.Metro.IconPacks.Material/4.11.0": {
       "type": "package",

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hfHXC1/S6VahxEte4WQpNrLyB6Frh3hk7aF7pJCXdjiHhzanUu5F5/lyCDQ/cGzpbAYtF4wtJVdZU56weivIYQ==",
+  "dgSpecHash": "5L91zL1uvM6Ka+6Ex1pa0R/1kdI5tdcR7i5EoObiAyYYIdqw+C3wcsPnfGoKUNUMC6oW7N3K84gLN/+bLSIPCQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\source\\repos\\DevopsCase4\\DevopsCase4\\DevopsCase4.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\mahapps.metro.iconpacks.material\\4.11.0\\mahapps.metro.iconpacks.material.4.11.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.0\\microsoft.data.sqlite.core.7.0.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.0\\microsoft.entityframeworkcore.7.0.0.nupkg.sha512",
