@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
@@ -32,8 +34,6 @@ namespace DevopsCase4.View
             InitializeComponent();
         }
 
-        private List<int?> idList;
-        private List<int?> idList2;
 
         public List<User> DatabaseUserList { get; private set; }
         public List<Message> MessageContentList { get; private set; }
@@ -41,41 +41,38 @@ namespace DevopsCase4.View
         public int ChatToId;
         public void Read()
         {
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
                 string useride = (string)GetValue(Messages.UidProperty);
                 int userid = int.Parse(useride);
-                idList = context.Messages.Where(x => x.FromId == userid).Select(u => u.ToId).ToList();
-                idList2 = context.Messages.Where(x => x.ToId == userid).Select(u => u.FromId).ToList();
-                idList2.ForEach(item => idList.Add(item));
-                DatabaseUserList = context.Users.Where(t => idList.Contains(t.Id)).ToList();
+                MessageBox.Show("/" + userid);
+                DatabaseUserList = db.Query<User>(
+                @"SELECT * From Users WHERE Id IN (SELECT FromId
+                FROM Messages 
+                WHERE FromId = @ID OR ToId = @ID) AND Id != @ID", new { ID = userid }).ToList();
+
                 MessageUserList.ItemsSource = DatabaseUserList;
             }
         }
         public void ReadChat()
         {
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
-
                 User? selectedUser = MessageUserList.SelectedItem as User;
-
                 if (selectedUser != null)
                 {
-                    
-                    User? SelectedUserdata = context.Users.Find(selectedUser.Id);
-                    if (SelectedUserdata != null)
-                    {
-                        
-                        string useride = (string)GetValue(Customers.UidProperty);
-                        int userid = int.Parse(useride);
+                    MessageBox.Show("lol");
 
-                        MessageContentList = context.Messages
-                            .Where(messages => messages.FromId == userid && messages.ToId == SelectedUserdata.Id || messages.FromId == SelectedUserdata.Id && messages.ToId == userid)
-                            .ToList();
-                        //.Where(messages => context.Users.Where(user => user.Id == messages.FromId)).Select(user => user.Name)
-                        MessagesList.ItemsSource = MessageContentList;
-                        ChatToId = SelectedUserdata.Id;
-                    }
+                    string useride = (string)GetValue(Customers.UidProperty);
+                    int userid = int.Parse(useride);
+
+                    MessageContentList = db.Query<Message>(
+                    @"SELECT *
+                    FROM Messages 
+                    WHERE (FromId = @USERID AND ToId = @ID) OR FromId = @ID AND ToId = @USERID ", new { ID = selectedUser.Id, USERID = userid }).ToList();
+
+                    MessagesList.ItemsSource = MessageContentList;
+                    ChatToId = selectedUser.Id;
                     Read();
                 }
             }
@@ -87,25 +84,29 @@ namespace DevopsCase4.View
 
         private void MessageUserList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
             ReadChat();
         }
 
         private void BtnChatSend_Click(object sender, RoutedEventArgs e)
         {
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
                 string content = txtChatMessageBox.Text;
 
                 string useride = (string)GetValue(Customers.UidProperty);
                 int userid = int.Parse(useride);
 
-                if (content != "" )
+                if (content != "") 
                 {
-                    context.Messages.Add(new Message() { ToId = userid, FromId = ChatToId, Content = content});
-                    context.SaveChanges();
-                    
-                    MessageContentList = context.Messages.Where(id => id.FromId == userid && id.ToId == ChatToId || id.FromId == ChatToId && id.ToId == userid).ToList();
+                    db.Execute("INSERT INTO Messages(ToId, FromId, Content) Values (@CHATTOID, @USERID, @CONTENT)",
+                    new { USERID = userid, CHATTOID = ChatToId, CONTENT = content });
 
+
+                    MessageContentList = db.Query<Message>(
+                    @"SELECT *
+                    FROM Messages 
+                    WHERE (FromId = @USERID AND ToId = @ID) OR FromId = @ID AND ToId = @USERID ", new { ID = ChatToId, USERID = userid }).ToList();
                     MessagesList.ItemsSource = MessageContentList;
                     txtChatMessageBox.Text = "";
                     ReadChat();
@@ -117,26 +118,26 @@ namespace DevopsCase4.View
         {
             string email = txtSearchPersonChat.Text;
 
-            using (UserDataContext context = new())
-            {
-                bool userfound = context.Users.Any(user => user.Email == email);
+            //using (UserDataContext context = new())
+            //{
+            //    bool userfound = context.Users.Any(user => user.Email == email);
 
-                string useride = (string)GetValue(Customers.UidProperty);
-                int userid = int.Parse(useride);
+            //    string useride = (string)GetValue(Customers.UidProperty);
+            //    int userid = int.Parse(useride);
 
-                if (userfound) {
-                    int Toid = context.Users.Where(user => user.Email == email).Select(u => u.Id).FirstOrDefault();
+            //    if (userfound) {
+            //        int Toid = context.Users.Where(user => user.Email == email).Select(u => u.Id).FirstOrDefault();
 
-                    context.Messages.Add(new Message() { ToId = userid, FromId = Toid, Content = "Just started a conversation" });
-                    context.SaveChanges();
+            //        context.Messages.Add(new Message() { ToId = userid, FromId = Toid, Content = "Just started a conversation" });
+            //        context.SaveChanges();
 
-                    Read();
-                }
-                else
-                {
-                    MessageBox.Show("User not found");
-                }
-            }
+            //        Read();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("User not found");
+            //    }
+            //}
         }
     }
 }

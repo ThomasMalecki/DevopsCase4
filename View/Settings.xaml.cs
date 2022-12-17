@@ -30,24 +30,24 @@ namespace DevopsCase4.View
 
         private void ShowUserInfo()
         {
-            using (UserDataContext context = new())
-            {
-                string useride = (string)GetValue(Settings.UidProperty);
-                int userid = int.Parse(useride);
-                User? user = context.Users.Find(userid);
-                if (user != null)
-                {
-                    txtChangeName.Text = user.Name;
-                    txtChangeLastName.Text = user.LastName;
-                    txtChangeCity.Text = user.City;
-                    txtChangeCountry.Text = user.Country;
-                    txtChangeEmail.Text = user.Email;
-                    txtChangeHouseNr.Text = user.HouseNr;
-                    txtChangeProvince.Text = user.Province;
-                    txtChangeStreet.Text = user.Street;
-                    context.SaveChanges();
-                }
-            }
+            //using (UserDataContext context = new())
+            //{
+            //    string useride = (string)GetValue(Settings.UidProperty);
+            //    int userid = int.Parse(useride);
+            //    User? user = context.Users.Find(userid);
+            //    if (user != null)
+            //    {
+            //        txtChangeName.Text = user.Name;
+            //        txtChangeLastName.Text = user.LastName;
+            //        txtChangeCity.Text = user.City;
+            //        txtChangeCountry.Text = user.Country;
+            //        txtChangeEmail.Text = user.Email;
+            //        txtChangeHouseNr.Text = user.HouseNr;
+            //        txtChangeProvince.Text = user.Province;
+            //        txtChangeStreet.Text = user.Street;
+            //        context.SaveChanges();
+            //    }
+            //}
         }
 
         private void UcSettings_Loaded(object sender, RoutedEventArgs e)
@@ -62,47 +62,47 @@ namespace DevopsCase4.View
 
         private void BtnUserEdit_Click(object sender, RoutedEventArgs e)
         {
-            using (UserDataContext context = new())
-            {
-                string useride = (string)GetValue(Settings.UidProperty);
-                int userid = int.Parse(useride);
-                User? user = context.Users.Find(userid);
-                bool emailfound = context.Users.Any(user => user.Email == (txtChangeEmail.Text).ToLower() && user.Id != userid);
-                if (user != null)
-                {
-                    user.Name = txtChangeName.Text;
-                    user.LastName = txtChangeLastName.Text;
-                    user.City = txtChangeCity.Text;
-                    user.Country = txtChangeCountry.Text;
+            //using (UserDataContext context = new())
+            //{
+            //    string useride = (string)GetValue(Settings.UidProperty);
+            //    int userid = int.Parse(useride);
+            //    User? user = context.Users.Find(userid);
+            //    bool emailfound = context.Users.Any(user => user.Email == (txtChangeEmail.Text).ToLower() && user.Id != userid);
+            //    if (user != null)
+            //    {
+            //        user.Name = txtChangeName.Text;
+            //        user.LastName = txtChangeLastName.Text;
+            //        user.City = txtChangeCity.Text;
+            //        user.Country = txtChangeCountry.Text;
                     
-                    if(!emailfound) { 
-                        user.Email = (txtChangeEmail.Text).ToLower();
-                    }
-                    user.HouseNr = txtChangeHouseNr.Text;
-                    user.Province = txtChangeProvince.Text;
-                    user.Street = txtChangeStreet.Text;
+            //        if(!emailfound) { 
+            //            user.Email = (txtChangeEmail.Text).ToLower();
+            //        }
+            //        user.HouseNr = txtChangeHouseNr.Text;
+            //        user.Province = txtChangeProvince.Text;
+            //        user.Street = txtChangeStreet.Text;
 
-                    context.SaveChanges();
+            //        context.SaveChanges();
 
 
-                    ShowUserInfo();
-                }
-                if (!emailfound)
-                {
-                    MessageBox.Show("Your account credentials were succesfully modified.");ShowUserInfo();
-                    context.Logs.Add(new Log() { UserId = userid, Description = "Account settings / credentials were modified.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-                    context.SaveChanges();
-                }
-                else
-                {
-                    MessageBox.Show("Your account credentials were modified except: email -> already in use.");
-                    context.Logs.Add(new Log() { UserId = userid, Description = "Account credentials where modified exept: email already in use.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-                    context.SaveChanges();
-                }
+            //        ShowUserInfo();
+            //    }
+            //    if (!emailfound)
+            //    {
+            //        MessageBox.Show("Your account credentials were succesfully modified.");ShowUserInfo();
+            //        context.Logs.Add(new Log() { UserId = userid, Description = "Account settings / credentials were modified.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
+            //        context.SaveChanges();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Your account credentials were modified except: email -> already in use.");
+            //        context.Logs.Add(new Log() { UserId = userid, Description = "Account credentials where modified exept: email already in use.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
+            //        context.SaveChanges();
+            //    }
                     
 
 
-            }
+            //}
         }
     }
 }

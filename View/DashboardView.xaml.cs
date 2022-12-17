@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -29,16 +31,21 @@ namespace DevopsCase4.View
             customers.Uid = userid.ToString();
             messages.Uid = userid.ToString();
             settings.Uid = userid.ToString();
-            
-            using (UserDataContext context = new())
+
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
-                
-                if (context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() == null || context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault() == null)
-                {
-                    MessageBoxResult result = MessageBox.Show("Your Credentials need to be completed. Want to complete them now?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
+                User? result = db.Query<User>(
+                @"select Name, LastName
+                FROM Users 
+                WHERE Id = @ID", new { ID = userid}).FirstOrDefault();
+                if(result != null) {
+                    if (result.Name == null || result.LastName == null)
                     {
-                        SetActiveUserControl(settings, BtnSettings);
+                        MessageBoxResult message = MessageBox.Show("Your Credentials need to be completed. Want to complete them now?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (message == MessageBoxResult.Yes)
+                        {
+                            SetActiveUserControl(settings, BtnSettings);
+                        }
                     }
                 }
 
@@ -49,9 +56,16 @@ namespace DevopsCase4.View
         }
         public void ReloadInfo()
         {
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
-                txtNavigationUserName.Text = context.Users.Where(user => user.Id == userid).Select(u => u.Name).FirstOrDefault() + " " + context.Users.Where(user => user.Id == userid).Select(u => u.LastName).FirstOrDefault();
+                User? result = db.Query<User>(
+                @"select Name, LastName
+                FROM Users 
+                WHERE Id = @ID", new { ID = userid }).FirstOrDefault();
+                if (result != null)
+                {
+                    txtNavigationUserName.Text = result.Name + " " + result.LastName;
+                }
             }
         }
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)

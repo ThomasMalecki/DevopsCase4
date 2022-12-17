@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
@@ -53,13 +55,16 @@ namespace DevopsCase4.View
                 
                 if(email != "" && Password != "")
                 {
-
-                    using (UserDataContext context = new())
+                    using (IDbConnection db = UserDataContext.GetConnection())
                     {
-                        bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
-                        if (userfound)
+                        User? result = db.Query<User>(
+                            @"select Email, Password, Id
+                            FROM Users 
+                            WHERE Password = @PASSWORD AND Email = @EMAIL", new { PASSWORD = Password, EMAIL = email }).FirstOrDefault();
+                        if (result != null)
                         {
-                            loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+                            loginId = result.Id;
+                            MessageBox.Show(result.Id + "");
 
                             GrantAccess();
                             Close();
@@ -79,23 +84,33 @@ namespace DevopsCase4.View
             }
             else
             {
-                if (email != "" && Password != "") { 
-                    using (UserDataContext context = new())
+
+                if (email != "" && Password != "")
+                {
+                    using (IDbConnection db = UserDataContext.GetConnection())
                     {
-                        bool userfound = context.Users.Any(user => user.Email == email && user.Password == Password);
-                        if (!userfound)
+                        User? result = db.Query<User>(
+                            @"select Email, Password
+                            FROM Users 
+                            WHERE Password = @PASSWORD AND Email = @EMAIL", new { PASSWORD = Password, EMAIL = email }).FirstOrDefault();
+                        if (result == null)
                         {
-                            context.Users.Add(new User() { Email = email, Password = Password });
-                            context.SaveChanges();
-                            loginId = context.Users.Where(user => user.Email == email && user.Password == Password).Select(u => u.Id).FirstOrDefault();
+                            db.Execute("INSERT INTO Users(email, Password) " +
+                            "VALUES (@EMAIL,@PASSWORD)", new { PASSWORD = Password, EMAIL = email });
+                            result = db.Query<User>(
+                            @"select Email, Password, Id 
+                            FROM Users 
+                            WHERE Password = @PASSWORD AND Email = @EMAIL", new { PASSWORD = Password, EMAIL = email }).FirstOrDefault();
+                            loginId = result.Id;
                             GrantAccess();
                             Close();
                         }
                         else
                         {
-                            MessageBox.Show("Username already exists", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("User already exists.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
+
                 }
                 else
                 {

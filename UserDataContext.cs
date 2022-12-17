@@ -1,8 +1,10 @@
 ﻿using DevopsCase4.View;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;  
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +13,9 @@ namespace DevopsCase4
 {
     public class UserDataContext : DbContext
     {
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public static IDbConnection GetConnection()
         {
-            optionsBuilder.UseSqlite("Data Source = DataFile.db");
+            return new SqliteConnection("Data Source = DataFile.db");
         }
-
-
-        public DbSet<User> Users { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Log> Logs { get; set; }
-        public DbSet<Message> Messages { get; set; }
     }
 }

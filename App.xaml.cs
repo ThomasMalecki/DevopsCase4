@@ -14,13 +14,8 @@ namespace DevopsCase4
     public partial class App : Application
     {
 
-        protected override void OnStartup(StartupEventArgs e)
+        public App()
         {
-            DatabaseFacade facade = new DatabaseFacade(new UserDataContext());
-            facade.EnsureCreated();
-
         }
-
-
     }
 }

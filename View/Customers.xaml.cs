@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
@@ -34,12 +36,17 @@ namespace DevopsCase4.View
         {
             string useride = (string)GetValue(Customers.UidProperty);
             int userid = int.Parse(useride);
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
-                DatabaseCustomers = context.Customers.Where(user => user.userId == userid).ToList();
-                
+
+                DatabaseCustomers = db.Query<Customer>(
+                @"SELECT *
+                FROM Customers 
+                WHERE UserId = @ID LIMIT 4", new { ID = userid }).ToList();
+
+
                 CustomerList.ItemsSource = DatabaseCustomers;
-                
+
             }
         }
 
@@ -67,9 +74,9 @@ namespace DevopsCase4.View
         }
         private void btnAddCustomerAdd_Click(object sender, RoutedEventArgs e)
         {
-            if(btnAddCustomerAdd.Content == "Add")
+            if (btnAddCustomerAdd.Content == "Add")
             {
-                using (UserDataContext context = new())
+                using (IDbConnection db = UserDataContext.GetConnection())
                 {
                     
                     var name = txtAddCustomerName.Text;
@@ -85,20 +92,22 @@ namespace DevopsCase4.View
                     {
                         string useride = (string)GetValue(Customers.UidProperty);
                         int userid = int.Parse(useride);
-                        context.Customers.Add(new Customer() { Name = name, LastName = lastName, Email = email, Country = country, Province = province, Street = street, HouseNr = houseNr, City = city, userId=userid});
-                        context.SaveChanges();
-                        context.Logs.Add(new Log() { UserId = userid, Description = "Customer " + name + " " + lastName + " was created.", Action = "PlusBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-                        context.SaveChanges();
-                        Read();
+
+                        db.Execute("INSERT INTO Customers(Name,LastName,City,Country,Email,HouseNr,Province,Street, userId) Values (@NAME, @LASTNAME, @CITY, @COUNTRY, @EMAIL, @HOUSENR, @PROVINCE, @STREET, @USERID)",
+                        new { NAME = name, LASTNAME = lastName, CITY = city, COUNTRY = country, EMAIL = email, HOUSENR = houseNr, PROVINCE = province, STREET = street, USERID = userid });
+
+                        db.Execute("INSERT INTO Logs (UserId, Description, Action, Timestamp) VALUES (@USERID, @DESCRIPTION, @ACTION, @TIMESTAMP)",
+                        new { USERID = userid, DESCRIPTION = "Customer " + name + " " + lastName + " was created.", ACTION = "PlusBox", TIMESTAMP = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
                     }
                     CustomerList.Visibility = Visibility.Visible;
                     addCustomersField.Visibility = Visibility.Collapsed;
                     AddcustomerClear();
+                    Read();
                 }
             }
             if(btnAddCustomerAdd.Content == "Edit")
             {
-                using (UserDataContext context = new())
+                using (IDbConnection db = UserDataContext.GetConnection())
                 {
                     Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
 
@@ -114,25 +123,12 @@ namespace DevopsCase4.View
                     if (name != "" && lastName != "" && email != "" && selectedCustomer != null)
                     {
 
-                        Customer? customer = context.Customers.Find(selectedCustomer.Id);
-                        if (customer != null)
-                        {
-                            string useride = (string)GetValue(Customers.UidProperty);
-                            int userid = int.Parse(useride);
-                            customer.Name = name;
-                            customer.LastName = lastName;
-                            customer.City = city;
-                            customer.Country = country;
-                            customer.Email = email;
-                            customer.HouseNr = houseNr;
-                            customer.Province = province;
-                            customer.Street = street;
-
-                            context.SaveChanges();
-
-                            context.Logs.Add(new Log() { UserId = userid, Description = "Customer " + name + " " + lastName + " was modfied.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-                            context.SaveChanges();
-                        }
+                        string useride = (string)GetValue(Customers.UidProperty);
+                        int userid = int.Parse(useride);
+                        db.Execute("UPDATE Customers SET Name = @NAME, LastName = @LASTNAME, City = @CITY, Country = @COUNTRY, Email = @EMAIL, HouseNr = @HOUSENR, Province = @PROVINCE, Street = @STREET WHERE Id = @CUSTOMERID",
+                        new { NAME = name, LASTNAME = lastName, CITY = city, COUNTRY = country, EMAIL = email, HOUSENR = houseNr, PROVINCE = province, STREET = street, CUSTOMERID = selectedCustomer.Id });
+                        db.Execute("INSERT INTO Logs (UserId, Description, Action, Timestamp) VALUES (@USERID, @DESCRIPTION, @ACTION, @TIMESTAMP)",
+                        new { USERID = userid , DESCRIPTION = "Customer " + name + " " + lastName + " was modfied." , ACTION = "PencilBox", TIMESTAMP = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
                         CustomerList.Visibility = Visibility.Visible;
                         addCustomersField.Visibility = Visibility.Collapsed;
                         AddcustomerClear();
@@ -147,7 +143,7 @@ namespace DevopsCase4.View
             CustomerList.Visibility = Visibility.Visible;
             addCustomersField.Visibility = Visibility.Collapsed;
             AddcustomerClear();
-            
+
         }
 
         private void btnCustomerEdit_Click(object sender, RoutedEventArgs e)
@@ -155,25 +151,26 @@ namespace DevopsCase4.View
             btnAddCustomerAdd.Content = "Edit";
             CustomerList.Visibility = Visibility.Collapsed;
             addCustomersField.Visibility = Visibility.Visible;
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
                 Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
-                if(selectedCustomer != null)
+                if (selectedCustomer != null)
                 {
 
-                    Customer? customer = context.Customers.Find(selectedCustomer.Id);
-                    if (customer != null)
+                    Customer? result = db.Query<Customer>(
+                    @"SELECT *
+                    FROM Customers  
+                    WHERE Id = @ID", new { ID = selectedCustomer.Id }).FirstOrDefault();
+                    if (result != null)
                     {
-                        txtAddCustomerName.Text = customer.Name;
-                        txtAddCustomerLastName.Text = customer.LastName;
-                        txtAddCity.Text = customer.City;
-                        txtAddCountry.Text = customer.Country;
-                        txtAddCustomerEmail.Text = customer.Email;
-                        txtAddHouseNr.Text = customer.HouseNr;
-                        txtAddProvince.Text = customer.Province;
-                        txtAddStreet.Text = customer.Street;
-
-                        context.SaveChanges();
+                        txtAddCustomerName.Text = result.Name;
+                        txtAddCustomerLastName.Text = result.LastName;
+                        txtAddCity.Text = result.City;
+                        txtAddCountry.Text = result.Country;
+                        txtAddCustomerEmail.Text = result.Email;
+                        txtAddHouseNr.Text = result.HouseNr;
+                        txtAddProvince.Text = result.Province;
+                        txtAddStreet.Text = result.Street;
                     }
                 }
             }
@@ -185,24 +182,16 @@ namespace DevopsCase4.View
             MessageBoxResult result = MessageBox.Show("Would you like to remove this user?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                using (UserDataContext context = new())
+                using (IDbConnection db = UserDataContext.GetConnection())
                 {
-
                     Customer? selectedCustomer = CustomerList.SelectedItem as Customer;
-
-
                     if (selectedCustomer != null)
                     {
-                        Customer? customer = context.Customers.Find(selectedCustomer.Id);
-                        if (customer != null)
-                        {
-                            string useride = (string)GetValue(Customers.UidProperty);
-                            int userid = int.Parse(useride);
-                            context.Remove(customer);
-                            context.SaveChanges();
-                            context.Logs.Add(new Log() { UserId = userid, Description = "Customer " + selectedCustomer.Name + " " + selectedCustomer.LastName + " was removed.", Action = "MinusBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-                            context.SaveChanges();
-                        }
+                        string useride = (string)GetValue(Customers.UidProperty);
+                        int userid = int.Parse(useride);
+                        db.Execute("DELETE FROM Customers WHERE id = @ID", new { ID = selectedCustomer.Id });
+                        db.Execute("INSERT INTO Logs (UserId, Description, Action, Timestamp) VALUES (@USERID, @DESCRIPTION, @ACTION, @TIMESTAMP)",
+                        new { USERID = userid, DESCRIPTION = "Customer " + selectedCustomer.Name + " " + selectedCustomer.LastName + " was removed.", ACTION = "MinusBox", TIMESTAMP = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
                         Read();
                     }
                 }

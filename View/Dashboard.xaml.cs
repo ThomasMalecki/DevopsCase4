@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -39,15 +41,20 @@ namespace DevopsCase4.View
         {
             string useride = (string)GetValue(Dashboard.UidProperty);
             int userid = int.Parse(useride);
-            using (UserDataContext context = new())
+            using (IDbConnection db = UserDataContext.GetConnection())
             {
-                DatabaseLogs = context.Logs.Where(log => log.UserId == userid).OrderByDescending(x => x.Id).Take(4).ToList();
+                DatabaseLogs = db.Query<Log>(
+                            @"SELECT Action, Timestamp, Description
+                            FROM Logs 
+                            WHERE UserId = @ID LIMIT 4", new { ID = userid}).ToList();
 
-                ActivityList.ItemsSource = DatabaseLogs;
 
+                if (DatabaseLogs.Count() > 0) {
+                    ActivityList.ItemsSource = DatabaseLogs;
+                }
 
             }
-        }
+        }   
 
         private void UcDashboard_Loaded(object sender, RoutedEventArgs e)
         {

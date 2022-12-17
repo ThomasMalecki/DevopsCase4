@@ -15,8 +15,6 @@ namespace DevopsCase4
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? HouseNr { get; set; }
-        public int Permission { get; set; }
-        public int CompanyId { get; set; }
 
     }
 }
