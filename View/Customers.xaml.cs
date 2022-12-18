@@ -38,15 +38,11 @@ namespace DevopsCase4.View
             int userid = int.Parse(useride);
             using (IDbConnection db = UserDataContext.GetConnection())
             {
-
                 DatabaseCustomers = db.Query<Customer>(
                 @"SELECT *
                 FROM Customers 
-                WHERE UserId = @ID LIMIT 4", new { ID = userid }).ToList();
-
-
+                WHERE UserId = @ID", new { ID = userid }).ToList();
                 CustomerList.ItemsSource = DatabaseCustomers;
-
             }
         }
 
@@ -78,7 +74,6 @@ namespace DevopsCase4.View
             {
                 using (IDbConnection db = UserDataContext.GetConnection())
                 {
-                    
                     var name = txtAddCustomerName.Text;
                     var lastName = txtAddCustomerLastName.Text;
                     var city = txtAddCity.Text;
