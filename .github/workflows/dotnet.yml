@@ -26,3 +26,16 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: |
+        dotnet publish -c Release -o application
+        
+        
+    - name: Upload a Build Artifat
+      uses: actions/upload-artifact@v2.20
+      with:
+        name: applicationbuildartifacts
+        path: application/**
+        if-no-files-found: error
+        retention-days: 90
+    
