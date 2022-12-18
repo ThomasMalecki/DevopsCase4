@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DevopsCase4.View
 {
@@ -29,6 +31,53 @@ namespace DevopsCase4.View
         {
             InitializeComponent();
             btnLogin.Content = "LOG IN";
+
+            using (IDbConnection db = UserDataContext.GetConnection())
+            {
+                db.Execute(@"CREATE TABLE if not exists Customers (
+                    Id INTEGER NOT NULL CONSTRAINT PK_Customers PRIMARY KEY AUTOINCREMENT,
+                    userId INTEGER NOT NULL,
+                    Email TEXT NOT NULL,
+                    Name TEXT NULL,
+                    LastName TEXT NULL,
+                    Country TEXT NULL,
+                    Province TEXT NULL,
+                    City TEXT NULL,
+                    Street TEXT NULL,
+                    HouseNr TEXT NULL
+                )"
+                );
+
+                db.Execute(@"CREATE TABLE if not exists Logs (
+                    Id INTEGER NOT NULL CONSTRAINT PK_Customers PRIMARY KEY AUTOINCREMENT,
+                    UserId INTEGER NOT NULL,
+                    Description TEXT NOT NULL,
+                    Action TEXT NULL,
+                    Timestamp TEXT NULL
+                )");
+
+                db.Execute(@"CREATE TABLE if not exists Messages (
+                    Id INTEGER NOT NULL CONSTRAINT PK_Messages PRIMARY KEY AUTOINCREMENT,
+                    Content TEXT NULL,
+                    FromId INTEGER NULL,
+                    ToId INTEGER NULL,
+                    Timestamp TEXT NULL
+                  )");
+
+                db.Execute(@"CREATE TABLE if not exists Users (
+	                Id	INTEGER NOT NULL,
+	                Email	TEXT,
+	                Password	TEXT,
+	                Name	TEXT,
+	                LastName	TEXT,
+	                Country	TEXT,
+	                Province	TEXT,
+	                City	TEXT,
+	                Street	TEXT,
+	                HouseNr	TEXT,
+	                CONSTRAINT PK_Users PRIMARY KEY(Id AUTOINCREMENT)
+                )");
+            }
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
