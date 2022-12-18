@@ -64,7 +64,6 @@ namespace DevopsCase4.View
                         if (result != null)
                         {
                             loginId = result.Id;
-                            MessageBox.Show(result.Id + "");
 
                             GrantAccess();
                             Close();

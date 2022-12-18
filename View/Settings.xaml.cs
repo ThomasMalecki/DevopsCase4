@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics.Metrics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace DevopsCase4.View
 {
@@ -30,24 +35,26 @@ namespace DevopsCase4.View
 
         private void ShowUserInfo()
         {
-            //using (UserDataContext context = new())
-            //{
-            //    string useride = (string)GetValue(Settings.UidProperty);
-            //    int userid = int.Parse(useride);
-            //    User? user = context.Users.Find(userid);
-            //    if (user != null)
-            //    {
-            //        txtChangeName.Text = user.Name;
-            //        txtChangeLastName.Text = user.LastName;
-            //        txtChangeCity.Text = user.City;
-            //        txtChangeCountry.Text = user.Country;
-            //        txtChangeEmail.Text = user.Email;
-            //        txtChangeHouseNr.Text = user.HouseNr;
-            //        txtChangeProvince.Text = user.Province;
-            //        txtChangeStreet.Text = user.Street;
-            //        context.SaveChanges();
-            //    }
-            //}
+            using (IDbConnection db = UserDataContext.GetConnection())
+            {
+                string useride = (string)GetValue(Settings.UidProperty);
+                int userid = int.Parse(useride);
+                User? result = db.Query<User>(
+                    @"SELECT *
+                    FROM Users  
+                    WHERE Id = @ID", new { ID = useride }).FirstOrDefault();
+                if (result != null)
+                {
+                    txtChangeName.Text = result.Name;
+                    txtChangeLastName.Text = result.LastName;
+                    txtChangeCity.Text = result.City;
+                    txtChangeCountry.Text = result.Country;
+                    txtChangeEmail.Text = result.Email;
+                    txtChangeHouseNr.Text = result.HouseNr;
+                    txtChangeProvince.Text = result.Province;
+                    txtChangeStreet.Text = result.Street;
+                }   
+            }
         }
 
         private void UcSettings_Loaded(object sender, RoutedEventArgs e)
@@ -62,47 +69,33 @@ namespace DevopsCase4.View
 
         private void BtnUserEdit_Click(object sender, RoutedEventArgs e)
         {
-            //using (UserDataContext context = new())
-            //{
-            //    string useride = (string)GetValue(Settings.UidProperty);
-            //    int userid = int.Parse(useride);
-            //    User? user = context.Users.Find(userid);
-            //    bool emailfound = context.Users.Any(user => user.Email == (txtChangeEmail.Text).ToLower() && user.Id != userid);
-            //    if (user != null)
-            //    {
-            //        user.Name = txtChangeName.Text;
-            //        user.LastName = txtChangeLastName.Text;
-            //        user.City = txtChangeCity.Text;
-            //        user.Country = txtChangeCountry.Text;
-                    
-            //        if(!emailfound) { 
-            //            user.Email = (txtChangeEmail.Text).ToLower();
-            //        }
-            //        user.HouseNr = txtChangeHouseNr.Text;
-            //        user.Province = txtChangeProvince.Text;
-            //        user.Street = txtChangeStreet.Text;
-
-            //        context.SaveChanges();
-
-
-            //        ShowUserInfo();
-            //    }
-            //    if (!emailfound)
-            //    {
-            //        MessageBox.Show("Your account credentials were succesfully modified.");ShowUserInfo();
-            //        context.Logs.Add(new Log() { UserId = userid, Description = "Account settings / credentials were modified.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-            //        context.SaveChanges();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Your account credentials were modified except: email -> already in use.");
-            //        context.Logs.Add(new Log() { UserId = userid, Description = "Account credentials where modified exept: email already in use.", Action = "PencilBox", Timestamp = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
-            //        context.SaveChanges();
-            //    }
-                    
+            using (IDbConnection db = UserDataContext.GetConnection())
+            {
+                string useride = (string)GetValue(Settings.UidProperty);
+                int userid = int.Parse(useride);
+                var emailfound = db.Query<User>(@"SELECT * FROM Users WHERE Email = @EMAIL", new { EMAIL = (txtChangeEmail.Text).ToLower() }).FirstOrDefault();
+                if (emailfound != null)
+                {
+                    db.Execute("UPDATE Users SET Name = @NAME, LastName = @LASTNAME, City = @CITY, Country = @COUNTRY, Email = @EMAIL, HouseNr = @HOUSENR, Province = @PROVINCE, Street = @STREET WHERE Id = @USERID",
+                    new { NAME = txtChangeName.Text, LASTNAME = txtChangeLastName.Text, CITY = txtChangeCity.Text, COUNTRY = txtChangeCountry.Text, EMAIL = (txtChangeEmail.Text).ToLower(), HOUSENR = txtChangeHouseNr.Text, PROVINCE = txtChangeProvince.Text, STREET = txtChangeStreet.Text, USERID = userid });
+                    ShowUserInfo();
+                }
+                if (emailfound != null)
+                {
+                    MessageBox.Show("Your account credentials were succesfully modified."); ShowUserInfo();
+                    db.Execute("INSERT INTO Logs (UserId, Description, Action, Timestamp) VALUES (@USERID, @DESCRIPTION, @ACTION, @TIMESTAMP)",
+                    new { USERID = userid, DESCRIPTION = "Account settings / credentials were modified.", ACTION = "PencilBox", TIMESTAMP = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
+                }
+                else
+                {
+                    MessageBox.Show("Your account credentials were modified except: email -> already in use.");
+                    db.Execute("INSERT INTO Logs (UserId, Description, Action, Timestamp) VALUES (@USERID, @DESCRIPTION, @ACTION, @TIMESTAMP)",
+                    new { USERID = userid, DESCRIPTION = "Account credentials not modified: Email already in use.", ACTION = "PencilBox", TIMESTAMP = DateTime.Now.ToString("d-M-yyyy - HH:mm") });
+                }
 
 
-            //}
+
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace DevopsCase4.View
                 DatabaseLogs = db.Query<Log>(
                             @"SELECT Action, Timestamp, Description
                             FROM Logs 
-                            WHERE UserId = @ID LIMIT 4", new { ID = userid}).ToList();
+                            WHERE UserId = @ID ORDER BY Id DESC LIMIT 4", new { ID = userid}).ToList();
 
 
                 if (DatabaseLogs.Count() > 0) {

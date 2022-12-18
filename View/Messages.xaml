@@ -80,7 +80,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Typography.Capitals="AllSmallCaps" VerticalAlignment="Center" Text="{Binding FromId}"></TextBlock>
+                                            <TextBlock Typography.Capitals="AllSmallCaps" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
                                             <TextBlock Typography.Capitals="AllSmallCaps" VerticalAlignment="Center" Text=": "></TextBlock>
                                         </StackPanel>
                                     </DataTemplate>

@@ -1,4 +1,7 @@
-﻿namespace DevopsCase4
+﻿using System.Collections.Generic;
+using System.Security.Principal;
+
+namespace DevopsCase4
 {
     public class Message
     {
