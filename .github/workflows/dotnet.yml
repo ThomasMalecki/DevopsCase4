@@ -32,7 +32,7 @@ jobs:
         
         
     - name: Upload a Build Artifat
-      uses: actions/upload-artifact@v2.20
+      uses: actions/upload-artifact@v3
       with:
         name: applicationbuildartifacts
         path: application/**
